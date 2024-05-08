@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once($GLOBALS["root_path"] . "utils/autoload.php");
+require_once(dirname(__FILE__) . getPath('/../utils/autoload.php'));
+require_once(dirname(__FILE__) . getPath('/../utils/functions.php'));
 
 define("TABLE", "tasks");
 
@@ -32,6 +34,7 @@ function deleteTask($id)
     $trash = R::trash($task);
     errorHandler($trash, "trash error");
     successHandler("task deleted");
+    header("location:../index.php");
 }
 
 function addTask($name)
@@ -43,6 +46,7 @@ function addTask($name)
     $id = R::store($task);
     errorHandler($id, "error add task");
     successHandler("task created");
+    header("location:../index.php");
 }
 
 function updateTask($id, $name, $is_done)
@@ -54,20 +58,5 @@ function updateTask($id, $name, $is_done)
     $id = R::store($task);
     errorHandler($id, "error update task");
     successHandler("task updated");
-}
-
-function errorHandler($entity, $errorMessage)
-{
-    if (!$entity) {
-        dmp($entity); // DEV MODE
-        echo ($errorMessage); // DEV MODE
-        $_SESSION["errors"] = $errorMessage;
-        die();
-    }
-}
-
-function successHandler($successMessage)
-{
-    echo ($successMessage); // DEV MODE
-    $_SESSION["success"] = $successMessage;
+    header("location:../index.php");
 }
