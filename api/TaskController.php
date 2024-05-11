@@ -1,5 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . getPath('/../utils/autoload.php'));
+require_once(dirname(__FILE__) . '/../database/connect.php');
+require_once(dirname(__FILE__) . '/../utils/functions.php');
 
 // if (isset($_GET["delete"])) {
 //     if (isset($_GET["id"])) {

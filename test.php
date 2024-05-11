@@ -1,7 +1,5 @@
 <?php
-
-require_once('./utils/autoload.php');
-require_once('./api/task-controller.php');
+require_once(dirname(__FILE__) . '/./api/TaskController.php');
 
 $taskController = new TaskController();
 

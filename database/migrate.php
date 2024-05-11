@@ -1,6 +1,5 @@
 <?php
-require(__DIR__ . "/../utils/functions.php");
-require(__DIR__ . getPath("/../database/config.php"));
+require_once("./config.php");
 $create_tables = file_get_contents("./sql/tables.sql");
 $insert_data = file_get_contents("./sql/insert.sql");
 
