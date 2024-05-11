@@ -1,13 +1,5 @@
 <?php
-
-namespace Api;
-
-use RedBeanPHP;
-
-session_start();
-require_once($GLOBALS["root_path"] . "utils/autoload.php");
 require_once(dirname(__FILE__) . getPath('/../utils/autoload.php'));
-require_once(dirname(__FILE__) . getPath('/../utils/functions.php'));
 
 // if (isset($_GET["delete"])) {
 //     if (isset($_GET["id"])) {

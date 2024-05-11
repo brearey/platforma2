@@ -1,10 +1,12 @@
 <?php
 
-// require_once('./utils/autoload.php');
-// require_once('./api/task-controller.php');
+require_once('./utils/autoload.php');
+require_once('./api/task-controller.php');
+
+$taskController = new TaskController();
 
 // addTask("Clear the room");
 // deleteTask(7);
-updateTask(8, "updated task", true);
+$taskController->updateTask(8, "updated task", true);
 echo ("<br>");
 echo ("test");

@@ -6,3 +6,5 @@ function getPath($path)
 // Connect to database
 require(realpath(dirname(__FILE__) . getPath('/../database/connect.php')));
 require(realpath(dirname(__FILE__) . getPath('/../utils/constants.php')));
+require(realpath(dirname(__FILE__) . getPath('/../utils/functions.php')));
+session_start();

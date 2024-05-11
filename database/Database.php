@@ -1,7 +1,5 @@
 <?
 
-use RedBeanPHP;
-
 class Database
 {
     function connect()
