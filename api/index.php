@@ -1,23 +1,14 @@
 <?php
 session_start();
+require_once('TaskController.php');
+$taskController = new TaskController();
 
-// if (isset($_GET["delete"])) {
-//     if (isset($_GET["id"])) {
-//         $id = $_GET["id"];
+if (isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "delete") {
+    $taskController->deleteTask($_GET["id"]);
+    header("location:../index.php");
+}
 
-//         $task = R::load("Task", $id);
-
-//         if (!$task) {
-//             $_SESSION["errors"] = "task not exists";
-//         } else {
-//             R::trash($task);
-//             $_SESSION["success"] = "data deleted succesfully";
-//         }
-
-
-
-
-//         // redirection 
-//         header("location:../index.php");
-//     }
-// }
+if (isset($_GET["action"]) && isset($_GET["id"]) && isset($_GET["name"]) && isset($_GET["is_done"]) && $_GET["action"] == "update") {
+    $taskController->updateTask($_GET["id"], $_GET["name"], $_GET["is_done"]);
+    header("location:../index.php");
+}

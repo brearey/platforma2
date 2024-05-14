@@ -1,21 +1,9 @@
 <?php session_start();
-
-
-$conn = mysqli_connect("localhost", "root", "", "todoapp");
-if (!$conn) {
-    echo "connect error " . mysqli_connect_error($conn);
-}
-
-$sql = "SELECT * FROM  `tasks` ORDER BY id DESC";
-$result = mysqli_query($conn, $sql);
-
-// echo "<pre>";
-// print_r();
-
-
+require_once(dirname(__FILE__) . '/database/connect.php');
+$tasks = R::findAll("tasks");
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -59,7 +47,7 @@ $result = mysqli_query($conn, $sql);
     </nav>
 
     <div class="container">
-        <div class="row">
+        <div class="task">
             <div class="col-8 mx-auto">
                 <form action="handelers/store-task.php" method="POST" class="form border p-2 my-5">
                     <?php if (isset($_SESSION['success'])) : ?>
@@ -96,19 +84,19 @@ $result = mysqli_query($conn, $sql);
                     </thead>
                     <tbody>
 
-                        <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                        <?php foreach ($tasks as $task) : ?>
 
-                            <?php // var_dump($row); die; 
+                            <?php // var_dump($task); die; 
                             ?>
                             <tr>
-                                <td><?php echo $row['id']; ?></td>
-                                <td><?php echo $row['title']; ?></td>
+                                <td><?php echo $task['id']; ?></td>
+                                <td><?php echo $task['name']; ?></td>
                                 <td>
-                                    <a href="handelers/delete-task.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> </a>
-                                    <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-info"><i class="fa-solid fa-edit"></i> </a>
+                                    <a href="api?action=delete&id=<?php echo $task['id']; ?>" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> </a>
+                                    <a href="update.php&id=<?php echo $task['id']; ?>" class="btn btn-info"><i class="fa-solid fa-edit"></i> </a>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
 
                     </tbody>
                 </table>
