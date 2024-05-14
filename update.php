@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -24,11 +24,10 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
-
-
     <div class="container">
         <div class="row">
             <div class="col-8 mx-auto">
+                <h1>Updating task</h1>
                 <form action="api?action=update&id=<?php echo $_GET['id']; ?>" method="POST" class="form border p-2 my-5">
 
                     <?php if (isset($_SESSION['errors'])) : ?>
