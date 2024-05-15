@@ -1,14 +1,13 @@
-<?php
-session_start();
+<?php session_start();
 require_once(dirname(__FILE__) . '/database/connect.php');
+
+$task;
 
 if (isset($_GET['id'])) {
     $task = R::load("tasks", $_GET['id']);
+} else {
+    $task = R::load("tasks", 1);
 }
-
-// echo "<pre>";
-// print_r();
-
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +27,7 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-8 mx-auto">
                 <h1>Updating task</h1>
-                <form action="api?action=update&id=<?php echo $_GET['id']; ?>" method="POST" class="form border p-2 my-5">
+                <form action="api?action=update&id=<?php echo $_GET['id']; ?>" method="GET" class="form border p-2 my-5">
 
                     <?php if (isset($_SESSION['errors'])) : ?>
                         <div class="alert alert-danger text-center">
@@ -39,8 +38,9 @@ if (isset($_GET['id'])) {
 
                         </div>
                     <?php endif; ?>
-                    <input type="text" name="title" value="<?php echo $task['name']; ?>" class="form-control my-3 border border-success" placeholder="add new todo">
-                    <input type="submit" value="Save" class="form-control btn btn-primary my-3 " placeholder="add new todo">
+                    <input type="text" name="name" value="<?php echo $task['name']; ?>" class="form-control my-3 border border-success" placeholder="add new todo">
+                    <input type="checkbox" name="is_done" <?= $task['is_done'] ? 'checked' : ''; ?> class="form-control my-3 border border-success">
+                    <input type="submit" value="Сохранить" class="form-control btn btn-primary my-3 " placeholder="add new todo">
                 </form>
             </div>
 
