@@ -93,7 +93,7 @@ $tasks = R::findAll("tasks");
                                 <td><?php echo $task['name']; ?></td>
                                 <td>
                                     <a href="api?action=delete&id=<?php echo $task['id']; ?>" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> </a>
-                                    <a href="update.php&id=<?php echo $task['id']; ?>" class="btn btn-info"><i class="fa-solid fa-edit"></i> </a>
+                                    <a href="update.php?id=<?php echo $task['id']; ?>" class="btn btn-info"><i class="fa-solid fa-edit"></i> </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

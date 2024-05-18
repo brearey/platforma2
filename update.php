@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-8 mx-auto">
                 <h1>Updating task</h1>
-                <form action="api?action=update&id=<?php echo $_GET['id']; ?>" method="GET" class="form border p-2 my-5">
+                <form action="/api" method="GET" class="form border p-2 my-5">
 
                     <?php if (isset($_SESSION['errors'])) : ?>
                         <div class="alert alert-danger text-center">
@@ -38,9 +38,11 @@ if (isset($_GET['id'])) {
 
                         </div>
                     <?php endif; ?>
+                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
                     <input type="text" name="name" value="<?php echo $task['name']; ?>" class="form-control my-3 border border-success" placeholder="add new todo">
-                    <input type="checkbox" name="is_done" <?= $task['is_done'] ? 'checked' : ''; ?> class="form-control my-3 border border-success">
-                    <input type="submit" value="Сохранить" class="form-control btn btn-primary my-3 " placeholder="add new todo">
+                    <input type="checkbox" name="is_done" <?= $task['is_done'] ? 'checked' : ''; ?> value="1" class="form-control my-3 border border-success">
+                    <input type="submit" value="Сохранить" class="form-control btn btn-primary my-3">
                 </form>
             </div>
 

@@ -28,7 +28,7 @@ class TaskController
         header("location:../index.php");
     }
 
-    public function updateTask($id, $name, $is_done)
+    public function updateTask($id, $name, $is_done = false)
     {
         $task = R::load($this->table, $id);
         errorHandler($task, "error load task");
