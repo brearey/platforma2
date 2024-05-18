@@ -11,66 +11,35 @@ $tasks = R::findAll("tasks");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <title>Document</title>
+    <title>Todo app by brearey</title>
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">TODO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Tasks <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Add User</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">All Users</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
-
     <div class="container">
         <div class="task">
             <div class="col-8 mx-auto">
-                <form action="handelers/store-task.php" method="POST" class="form border p-2 my-5">
-                    <?php if (isset($_SESSION['success'])) : ?>
-                        <div class="alert alert-success text-center">
-                            <?php
-                            echo $_SESSION['success'];
-                            unset($_SESSION['success']);
-                            ?>
+                <?php if (isset($_SESSION['success'])) : ?>
+                    <div class="alert alert-success text-center">
+                        <?php
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                        ?>
 
-                        </div>
-                    <?php endif; ?>
+                    </div>
+                <?php endif; ?>
 
-                    <?php if (isset($_SESSION['errors'])) : ?>
-                        <div class="alert alert-danger text-center">
-                            <?php
-                            echo $_SESSION['errors'];
-                            unset($_SESSION['errors']);
-                            ?>
+                <?php if (isset($_SESSION['errors'])) : ?>
+                    <div class="alert alert-danger text-center">
+                        <?php
+                        echo $_SESSION['errors'];
+                        unset($_SESSION['errors']);
+                        ?>
 
-                        </div>
-                    <?php endif; ?>
-                    <input type="text" name="title" class="form-control my-3 border border-success" placeholder="add new todo">
-                    <input type="submit" value="Add" class="form-control btn btn-primary my-3 " placeholder="add new todo">
+                    </div>
+                <?php endif; ?>
+                <form action="/api/index.php" method="POST" class="form border p-2 my-5">
+                    <input type="text" name="name" class="form-control my-3 border border-success" placeholder="add new todo">
+                    <input type="submit" value="Add" class="form-control btn btn-primary my-3">
                 </form>
             </div>
             <div class="col-12">
@@ -78,8 +47,9 @@ $tasks = R::findAll("tasks");
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Task</th>
-                            <th>Action</th>
+                            <th>Задача</th>
+                            <th>Выполнено?</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,8 +59,9 @@ $tasks = R::findAll("tasks");
                             <?php // var_dump($task); die; 
                             ?>
                             <tr>
-                                <td><?php echo $task['id']; ?></td>
-                                <td><?php echo $task['name']; ?></td>
+                                <td><?= $task['id']; ?></td>
+                                <td><?= $task['name']; ?></td>
+                                <td><?= $task['is_done'] ? "Да" : "Нет" ?></td>
                                 <td>
                                     <a href="api?action=delete&id=<?php echo $task['id']; ?>" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> </a>
                                     <a href="update.php?id=<?php echo $task['id']; ?>" class="btn btn-info"><i class="fa-solid fa-edit"></i> </a>

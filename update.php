@@ -19,14 +19,14 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <title>Document</title>
+    <title>Обновить задачу</title>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="col-8 mx-auto">
-                <h1>Updating task</h1>
+                <h1>Обновить задачу</h1>
                 <form action="/api" method="GET" class="form border p-2 my-5">
 
                     <?php if (isset($_SESSION['errors'])) : ?>
@@ -40,8 +40,11 @@ if (isset($_GET['id'])) {
                     <?php endif; ?>
                     <input type="hidden" name="action" value="update">
                     <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-                    <input type="text" name="name" value="<?php echo $task['name']; ?>" class="form-control my-3 border border-success" placeholder="add new todo">
-                    <input type="checkbox" name="is_done" <?= $task['is_done'] ? 'checked' : ''; ?> value="1" class="form-control my-3 border border-success">
+                    <input type="text" name="name" value="<?php echo $task['name']; ?>" class="form-control my-3 border border-success" placeholder="Название задачи">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="is_done" <?= $task['is_done'] ? 'checked' : ''; ?> value="1" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Отметить как выполненное</label>
+                    </div>
                     <input type="submit" value="Сохранить" class="form-control btn btn-primary my-3">
                 </form>
             </div>
@@ -51,7 +54,6 @@ if (isset($_GET['id'])) {
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>
