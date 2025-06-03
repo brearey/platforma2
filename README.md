@@ -1,6 +1,4 @@
-# Test job for Platforma.bz company
-
-## PHP todo list app
+# PHP todo list app
 
 ## Stack
 
